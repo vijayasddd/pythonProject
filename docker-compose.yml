@@ -1,0 +1,14 @@
+version: "3"
+services:
+  translate_py:
+    container_name: translate_py
+    image: vijay/translate_py:latest
+    privileged: true
+    user: root
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        CUR_ENV: ${CUR_ENV}
+    ports:
+      - "5001:5001"
