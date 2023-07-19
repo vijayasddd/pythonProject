@@ -14,14 +14,18 @@ def hello():
 
 @app.route('/api', methods=['POST'])
 def api():
-    data = request.json
-    translations = translator.translate(data['data'], src=data['src'],
-                                        dest=data['dest'])
-    if not isinstance(translations, Iterable):
-        return translations.text
-    results = list()
-    for translation in list(translations):
-        results.append(translation.text)
+    try:
+        data = request.json
+        translations = translator.translate(data['data'], src=data['src'],
+                                            dest=data['dest'])
+        if not isinstance(translations, Iterable):
+            return translations.text
+        results = list()
+        for translation in list(translations):
+            results.append(translation.text)
+    except:
+        print("translate expection")
+        return []
 
     return results
 
