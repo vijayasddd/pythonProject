@@ -17,7 +17,7 @@ def api():
     try:
         data = request.json
         translations = None
-        if data['src']:
+        if "src" in data:
             translations = translator.translate(data['data'], src=data['src'],
                                                 dest=data['dest'])
         else:
