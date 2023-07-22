@@ -16,8 +16,12 @@ def hello():
 def api():
     try:
         data = request.json
-        translations = translator.translate(data['data'], src=data['src'],
-                                            dest=data['dest'])
+        translations = None
+        if data['src']:
+            translations = translator.translate(data['data'], src=data['src'],
+                                                dest=data['dest'])
+        else:
+            translations = translator.translate(data['data'], dest=data['dest'])
         if not isinstance(translations, Iterable):
             return translations.text
         results = list()
