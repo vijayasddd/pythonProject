@@ -1,11 +1,13 @@
 from googletrans import Translator
 from flask import Flask, request
 from collections.abc import Iterable
+import logging
 
 translator = Translator()
 
 app = Flask(__name__)
-
+log = logging.getLogger('werkzeug')
+log.disabled = True
 
 @app.route('/')
 def hello():
